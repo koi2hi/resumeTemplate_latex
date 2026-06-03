@@ -14,6 +14,10 @@
 # Generated PDF
 *.pdf
 
+# Ignore all JPG/PNG files under image folder
+image/**/*.jpg
+image/**/*.png
+
 # Personal photos (keep template anonymous)
 image/personal*
 image/me.*
