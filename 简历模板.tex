@@ -1,0 +1,184 @@
+\documentclass[11pt,a4paper]{article}
+
+% 引入中文支持包
+\usepackage[UTF8]{ctex}
+% 页面边距设置 (一页纸简历的核心，充分利用空间)
+\usepackage[left=1.5cm, right=1.5cm, top=1.5cm, bottom=1.5cm]{geometry}
+% 标题格式自定义
+\usepackage{titlesec}
+% 列表格式自定义
+\usepackage{enumitem}
+% 线性图标（接近示例风格）
+\usepackage{fontawesome5}
+% 图片支持
+\usepackage{graphicx}
+% 图形裁切（用于圆形校徽）
+\usepackage{tikz}
+% 超链接支持
+\usepackage[colorlinks=true, linkcolor=blue, urlcolor=black]{hyperref}
+% 颜色包
+\usepackage{xcolor}
+
+% --- 样式自定义 ---
+% 定义主题色 (深蓝色，显得专业沉稳)
+\definecolor{ThemeColor}{RGB}{25, 75, 125}
+\definecolor{LightGray}{RGB}{225, 231, 238}
+
+% 自定义 section 标题样式：大号字体、加粗、主题色、带下划线
+\titleformat{\section}{\large\bfseries\color{ThemeColor}}{}{0em}{}[\vspace{-1pt}\color{LightGray}\titlerule]
+\titlespacing{\section}{0pt}{10pt}{5pt} % 控制标题上下的间距
+
+% 自定义 itemize 列表样式：取消多余缩进，减小行距
+\setlist[itemize]{leftmargin=*, noitemsep, topsep=2pt, partopsep=0pt, parsep=2pt}
+
+% 标题前的小图案（统一风格）
+\newcommand{\titleicon}[1]{\textcolor{ThemeColor}{\normalsize #1}\hspace{0.35em}}
+\newcommand{\resumesection}[2]{\section*{\titleicon{#1}#2}}
+\newcommand{\eduicon}{\faIcon{graduation-cap}}
+\newcommand{\skillicon}{\faIcon{wrench}}
+\newcommand{\projicon}{\faIcon{code}}
+\newcommand{\awardicon}{\faIcon{trophy}}
+\newcommand{\selficon}{\faIcon{user}}
+% 新增可选区块图标
+\newcommand{\internicon}{\faIcon{briefcase}}
+\newcommand{\campusicon}{\faIcon{users}}
+\newcommand{\langicon}{\faIcon{language}}
+\newcommand{\researchicon}{\faIcon{microscope}}
+\newcommand{\topicicon}{\faIcon{book}}
+
+% 图片占位或加载（照片/校徽）
+\newcommand{\imageorplaceholder}[3]{
+    \IfFileExists{#1}{
+        \includegraphics[width=#2,height=#3,keepaspectratio]{#1}
+    }{
+        \fcolorbox{LightGray}{white}{\parbox[c][#3][c]{#2}{\centering\scriptsize\color{gray}图片占位}}
+    }
+}
+
+% 圆形图标（用于学校图标）
+\newcommand{\circleimageorplaceholder}[2]{
+    \IfFileExists{#1}{
+        \begin{tikzpicture}
+            \clip (0,0) circle (#2/2);
+            \node at (0,0) {\includegraphics[width=#2,height=#2]{#1}};
+            \draw[LightGray, line width=0.3pt] (0,0) circle (#2/2);
+        \end{tikzpicture}
+    }{
+        \begin{tikzpicture}
+            \draw[LightGray, line width=0.4pt, fill=white] (0,0) circle (#2/2);
+            \node[gray] at (0,0) {\scriptsize 校徽};
+        \end{tikzpicture}
+    }
+}
+
+\begin{document}
+% 取消页码
+\pagestyle{empty}
+
+% ==================== 头部信息 ====================
+\noindent
+\begin{minipage}[c]{0.17\textwidth}
+    ~
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.66\textwidth}
+    \centering
+    {\LARGE \textbf{你的名字}} \\[6pt]
+    \small
+    \textbf{求职意向：} C/C++ 后台开发日常实习生 \\[3pt]
+    \textbf{到岗时间：} 每周可实习4-5天，可随时入职 \\[4pt]
+    \textcolor{ThemeColor}{\faIcon{map-marker-alt}}\ 深圳南山区 \quad|\quad
+    \textcolor{ThemeColor}{\faIcon{phone}}\ 138-XXXX-XXXX \\[2pt]
+    \textcolor{ThemeColor}{\faIcon{at}}\ your.email@example.com \quad|\quad
+    \textcolor{ThemeColor}{\faIcon{github}}\ \href{https://github.com/your_id}{github.com/your\_id}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.15\textwidth}
+    \raggedleft\imageorplaceholder{assets/images/photo.jpg}{2.0cm}{2.55cm}
+\end{minipage}
+
+\vspace{5pt}
+
+% ==================== 教育背景 ====================
+\resumesection{\eduicon}{教育背景}
+\noindent\textbf{某某大学\quad 计算机科学与技术\quad 本科 (大二在读)} \hfill 2024年9月 -- 2028年6月
+\begin{itemize}
+    \item \textbf{主修课程：} 数据结构、算法设计与分析、C++面向对象编程等。
+    \item \textbf{学业进展：} 正在系统深入学习 Linux 网络编程、操作系统底层原理及现代 C++ 特性。
+\end{itemize}
+
+% ==================== 专业技能 ====================
+\resumesection{\skillicon}{专业技能}
+\begin{itemize}
+    \item \textbf{编程语言：} 熟悉 C/C++，了解面向对象编程思想；熟悉常用 STL 容器及其底层原理；正在学习 C++11 新特性（智能指针、右值引用等）与内存管理。
+    \item \textbf{数据结构与算法：} 具备扎实的算法功底，熟练掌握排序、贪心、二分、枚举、树等算法；有蓝桥杯省赛备赛经验，目前持续在 LeetCode 进行针对性刷题训练。
+    \item \textbf{计算机基础：} 了解计算机网络（TCP/IP模型、TCP三次握手等）与操作系统（进程与线程概念）的基础理论，目前正在结合项目深入学习。
+    \item \textbf{开发环境：} 熟悉 Linux 基础环境配置与常用命令，了解基本的 Git 版本控制操作。
+\end{itemize}
+
+% ==================== 项目经历 ====================
+\resumesection{\projicon}{项目经历}
+\textbf{轻量级高性能 Web 服务器 (开发中)} \hfill 个人独立项目 \\
+\textit{C++, Linux, epoll, Socket} \hfill 2026年5月 -- 至今
+\begin{itemize}
+    \item \textbf{项目背景：} 为加深对网络编程和操作系统底层机制的理解，基于 Linux 环境和 C++ 开发的高并发 Web 服务器。
+    \item \textbf{核心技术：} 采用 \texttt{epoll} I/O 多路复用技术处理高并发客户端连接；实现基于有限状态机的 HTTP 请求解析。
+    \item \textbf{当前进展：} 已完成基础的 TCP Socket 通信模块封装，正在接入 \texttt{epoll} 并发模型与线程池，后续将引入压测工具进行性能调优。
+\end{itemize}
+
+% ==================== 荣誉奖项 ====================
+\resumesection{\awardicon}{荣誉奖项}
+\begin{itemize}
+    \item 第XX届 蓝桥杯全国软件和信息技术专业人才大赛 (C/C++大学组) \textbf{省赛X等奖} \hfill 2025年X月
+    \item 某某大学 优秀学生/校级奖学金 (若有则写，无则删除此行) \hfill 2025年X月
+\end{itemize}
+
+% ==================== 自我评价 ====================
+\resumesection{\selficon}{自我评价}
+\begin{itemize}
+    \item \textbf{极强的学习自驱力：} 明确大厂 C/C++ 岗位要求，大二起主动脱离“舒适区”，制定了高强度的底层技术补齐计划，能够快速吸收并应用新技术。
+    \item \textbf{地理与时间优势：} 身处深圳南山，时间充裕，无入职缓冲期。对技术充满热情，极其渴望进入真实的工业级团队打磨工程能力，能承受较高强度的工作节奏。
+\end{itemize}
+
+% --------------------------------------------------
+% 可选区块模板（注释掉的示例）
+% 使用方法：将下面对应区块前面的百分号（%）去掉，复制到需要的位置，填写具体内容。
+% --------------------------------------------------
+
+% % \resumesection{\internicon}{实习经历}
+% % \textbf{公司名称} \hfill 城市 \\ 
+% % 职位：实习生 \quad 年份：2023.07 -- 2024.04
+% % \begin{itemize}
+% %     \item 主要职责：例如负责后端模块开发、需求拆解与实现。
+% %     \item 成果/量化：例如优化某接口，吞吐提升 X%，或修复 Y 个关键 bug。
+% % \end{itemize}
+%
+% % \resumesection{\campusicon}{校园经历}
+% % \textbf{学生组织 / 社团名称} \hfill 学校 \\ 
+% % 职务：负责人/成员 \quad 年份：2022 -- 2023
+% % \begin{itemize}
+% %     \item 活动或项目：例如组织技术沙龙、带领团队完成比赛。
+% %     \item 贡献与能力：例如项目管理、协调资源、活动策划。
+% % \end{itemize}
+%
+% % \resumesection{\langicon}{语言技能}
+% % \begin{itemize}
+% %     \item 汉语：母语
+% %     \item 英语：阅读（专业），听说（良好）
+% %     \item 其他语言：如日语/法语等，写明水平等级或证书。
+% % \end{itemize}
+%
+% % \resumesection{\researchicon}{科研成果}
+% % \begin{itemize}
+% %     \item 论文/成果名称（期刊/会议，年份）—— 简短说明贡献与成果。
+% %     \item 项目或成果：如算法改进、数据集发布、工具/库的开源等。
+% % \end{itemize}
+%
+% % \resumesection{\topicicon}{研究课题}
+% % \begin{itemize}
+% %     \item 课题名称：简述研究目标和方法。
+% %     \item 目前进展：例如已完成的工作（数据收集、模型搭建、实验验证）。
+% %     \item 未来计划：后续要做的实验或预期发表计划。
+% % \end{itemize}
+
+\end{document}

@@ -1,0 +1,21 @@
+﻿# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.toc
+*.xdv
+*.nav
+*.snm
+*.vrb
+
+# Generated PDF
+*.pdf
+
+# Personal photos (keep template anonymous)
+image/personal*
+image/me.*
+assets/personal*
+assets/me.*
