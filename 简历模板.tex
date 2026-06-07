@@ -1,3 +1,6 @@
+% ==================== 全局可调参数 ====================
+% 修改方法：优先改这里，能统一控制整份简历的字号和行距。
+% 例如：11pt -> 10pt / 12pt；\ResumeLineSpacing{} 调大可更松，调小可更紧凑。
 \documentclass[11pt,a4paper]{article}
 
 % 引入中文支持包
@@ -8,6 +11,8 @@
 \usepackage{titlesec}
 % 列表格式自定义
 \usepackage{enumitem}
+% 行距控制
+\usepackage{setspace}
 % 线性图标（接近示例风格）
 \usepackage{fontawesome5}
 % 图片支持
@@ -24,11 +29,31 @@
 \definecolor{ThemeColor}{RGB}{25, 75, 125}
 \definecolor{LightGray}{RGB}{225, 231, 238}
 
+% ==================== 字体大小 / 行距 ====================
+% 修改方法：
+% 1. 整体字号：改 documentclass 里的 11pt，例如 10pt 更紧凑，12pt 更大。
+% 2. 局部字号：把 \small / \normalsize / \large / \LARGE 改成你想要的大小。
+% 3. 行距：这里的 1.0 = 标准行距，1.05 ~ 1.15 更适合简历。
+\newcommand{\ResumeLineSpacing}{1.06}
+\setstretch{\ResumeLineSpacing}
+
+% 需要更细粒度控制时，可以直接在某一段前使用：
+% \begin{spacing}{1.08}
+%   这一段会单独变松
+% \end{spacing}
+
 % 自定义 section 标题样式：大号字体、加粗、主题色、带下划线
 \titleformat{\section}{\large\bfseries\color{ThemeColor}}{}{0em}{}[\vspace{-1pt}\color{LightGray}\titlerule]
 \titlespacing{\section}{0pt}{10pt}{5pt} % 控制标题上下的间距
 
+% 标题字号修改方法：把 \large 改成 \normalsize / \small / \Large / \LARGE
+% 如果标题之间太挤，可以优先调 \titlespacing 的上下间距
+
 % 自定义 itemize 列表样式：取消多余缩进，减小行距
+% 修改方法：
+% - noitemsep：去掉条目之间的额外空隙
+% - topsep：列表上下留白
+% - parsep：同一条目内多段落的间距
 \setlist[itemize]{leftmargin=*, noitemsep, topsep=2pt, partopsep=0pt, parsep=2pt}
 
 % 标题前的小图案（统一风格）
@@ -75,6 +100,11 @@
 % 取消页码
 \pagestyle{empty}
 
+% 如果你想让正文整体再紧凑一点，可在这里改成：
+% \small
+% 如果想整体更大一点，可改成：
+% \normalsize
+
 % ==================== 头部信息 ====================
 \noindent
 \begin{minipage}[c]{0.17\textwidth}
@@ -83,7 +113,9 @@
 \hfill
 \begin{minipage}[c]{0.66\textwidth}
     \centering
+    % 名字字号修改：\LARGE / \Large / \huge 都可以试，越往后越大
     {\LARGE \textbf{你的名字}} \\[6pt]
+    % 这里控制头部个人信息的字号，改成 \normalsize 会更大，改成 \footnotesize 会更紧凑
     \small
     \textbf{求职意向：} C/C++ 后台开发日常实习生 \\[3pt]
     \textbf{到岗时间：} 每周可实习4-5天，可随时入职 \\[4pt]
